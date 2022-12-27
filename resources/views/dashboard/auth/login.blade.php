@@ -23,7 +23,7 @@
 
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form-horizontal form-simple" action="{{route('admin.login')}}" method="post" novalidate>
+                        <form class="form-horizontal form-simple" action="{{route('admin.login.save')}}" method="post" novalidate>
 
                             @csrf
 

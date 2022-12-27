@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware("guest:admin")->group(function () {
-    Route::get('login', 'LoginController@index')->name('admin.login');
-    Route::post('login', 'LoginController@login')->name('admin.login');
-});
+Route::prefix(LaravelLocalization::setLocale() . '/admin')->middleware(['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])
+    ->group(
+        function () {
+            Route::middleware("guest:admin")->group(function () {
+                Route::get('login', 'LoginController@index')->name('admin.login');
+                Route::post('login', 'LoginController@login')->name('admin.login.save');
+            });
 
-Route::middleware("auth:admin")->group(function () {
-    Route::get('/', 'DashboardController@index')->name('admin.dashboard');
-});
+            Route::middleware("auth:admin")->group(function () {
+                Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+
+                Route::prefix('settings')->group(function () {
+                    Route::get('shipping/{type}', 'SettingsController@editShippingMethods')->name('shipping.method.edit');
+                    Route::put('shipping/{id}', 'SettingsController@updateShippingMethods')->name('shipping.method.update');
+                });
+            });
+        }
+    );
