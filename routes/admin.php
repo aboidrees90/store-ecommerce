@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\LoginController;
+use App\Http\Controllers\Dashboard\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -18,16 +21,16 @@ Route::prefix(LaravelLocalization::setLocale() . '/admin')->middleware(['localeS
     ->group(
         function () {
             Route::middleware("guest:admin")->group(function () {
-                Route::get('login', 'LoginController@index')->name('admin.login');
-                Route::post('login', 'LoginController@login')->name('admin.login.save');
+                Route::get('login', [LoginController::class,'index'])->name('admin.login');
+                Route::post('login', [LoginController::class],'login')->name('admin.login.save');
             });
 
             Route::middleware("auth:admin")->group(function () {
-                Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+                Route::get('/', [DashboardController::class,'index'])->name('admin.dashboard');
 
                 Route::prefix('settings')->group(function () {
-                    Route::get('shipping/{type}', 'SettingsController@editShippingMethods')->name('shipping.method.edit');
-                    Route::put('shipping/{id}', 'SettingsController@updateShippingMethods')->name('shipping.method.update');
+                    Route::get('shipping/{type}', [SettingsController::class,'editShippingMethods'])->name('shipping.method.edit');
+                    Route::put('shipping/{id}', [SettingsController::class, 'updateShippingMethods'])->name('shipping.method.update');
                 });
             });
         }
