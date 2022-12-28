@@ -13,7 +13,7 @@ class Setting extends Model
 
   protected $with = ['translations'];
 
-  protected $translatedAttributes = ['value'];
+  protected array $translatedAttributes = ['value'];
 
   protected $fillable = ['key', 'is_translatable', 'plain_value'];
 
@@ -26,7 +26,7 @@ class Setting extends Model
    * @return void
    */
 
-  public static function setMany($settings)
+  public static function setMany(array $settings): void
   {
     foreach ($settings as $key => $value) {
       self::set($key, $value);
@@ -40,7 +40,7 @@ class Setting extends Model
    * @param mixed $value
    * @return void
    */
-  public static function set($key, $value)
+  public static function set(string $key, mixed $value): void
   {
     if ($key === 'translatable') {
       static::setTranslatableSettings($value);
@@ -55,7 +55,7 @@ class Setting extends Model
    * @param array $settings
    * @return void
    */
-  public static function setTranslatableSettings($settings = [])
+  public static function setTranslatableSettings(array $settings = []): void
   {
     foreach ($settings as $key => $value) {
       static::updateOrCreate(

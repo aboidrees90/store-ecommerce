@@ -22,16 +22,19 @@ Route::prefix(LaravelLocalization::setLocale() . '/admin')->middleware(['localeS
         function () {
             Route::middleware("guest:admin")->group(function () {
                 Route::get('login', [LoginController::class,'index'])->name('admin.login');
-                Route::post('login', [LoginController::class],'login')->name('admin.login.save');
+                Route::post('login', [LoginController::class,'login'])->name('admin.login.save');
             });
 
             Route::middleware("auth:admin")->group(function () {
-                Route::get('/', [DashboardController::class,'index'])->name('admin.dashboard');
+              Route::get('/', [DashboardController::class,'index'])->name('admin.dashboard');
+              Route::get('/profile', [DashboardController::class,'profile'])->name('admin.profile');
 
                 Route::prefix('settings')->group(function () {
                     Route::get('shipping/{type}', [SettingsController::class,'editShippingMethods'])->name('shipping.method.edit');
                     Route::put('shipping/{id}', [SettingsController::class, 'updateShippingMethods'])->name('shipping.method.update');
                 });
+
+              Route::get('/logout', [LoginController::class,'logout'])->name('admin.logout');
             });
         }
     );
