@@ -54,14 +54,14 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <x-form.input name="name" label="{{ __('admin/shipping.name') }}" value="{{ $shippingMethod->value }}" />
+                            <x-form.input name="value" label="{{ __('admin/shipping.name') }}" value="{{ $shippingMethod->value }}" />
                           </div>
                         </div>
 
 
                         <div class="col-md-6 ">
                           <div class="form-group">
-                            <x-form.input name="plain_value" type="number" label="{{ __('admin/shipping.cost') }}" value="" />
+                            <x-form.input name="plain_value" type="number" label="{{ __('admin/shipping.cost') }}" value="{{ $shippingMethod->plain_value }}" />
                           </div>
                         </div>
                       </div>

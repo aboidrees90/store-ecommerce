@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Setting;
+use App\Http\Requests\ShippingRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 
 class SettingsController extends Controller
@@ -27,9 +29,24 @@ class SettingsController extends Controller
     return view('dashboard.settings.shipping.edit', compact('shippingMethod', 'title'));
   }
 
-  public function updateShippingMethods(Request $request, $id)
+  public function updateShippingMethods(ShippingRequest $request, $id): RedirectResponse
   {
 
-    return $request;
+    try {
+      $shippingMethod = Setting::find($id);
+
+      DB::beginTransaction();
+      $shippingMethod->update(['plain_value' => $request->input('plain_value')]);
+
+      // Save translation
+      $shippingMethod->value = $request->input('value');
+      $shippingMethod->save();
+      DB::commit();
+
+      return redirect()->back()->with(['success' => 'تم التحديث بنجاح']);
+    } catch (\Exception $ex) {
+      DB::rollBack();
+      return redirect()->back()->with(['error' => 'فشل عملية التحديث']);
+    }
   }
 }
