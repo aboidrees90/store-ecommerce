@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class SettingTranslation extends Model
 {
-    protected $table = "setting_translations";
+  protected $table = "setting_translations";
 
-    protected $fillable = ['value'];
+  protected $fillable = ['value'];
 
-    public $timestamps = false;
+  public $timestamps = false;
 }

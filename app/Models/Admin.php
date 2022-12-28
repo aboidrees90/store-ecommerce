@@ -9,10 +9,10 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+  use HasApiTokens, HasFactory, Notifiable;
 
 
-    protected $table = "admins";
-    protected $guarded = [];
-    public $timestamps = true;
+  protected $table = "admins";
+  protected $guarded = [];
+  public $timestamps = true;
 }

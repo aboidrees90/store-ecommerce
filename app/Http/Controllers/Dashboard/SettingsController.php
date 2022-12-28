@@ -10,22 +10,26 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-    //
+  //
 
-    public function editShippingMethods($type): View
-    {
-        if(in_array($type, ['free', 'local','outer']))
-        {
-            $shippingMethod =  Setting::where('key',"{$type}_shipping_label")->first();
-        }else{
-            $shippingMethod = Setting::where('key',"free_shipping_label")->first();
-        }
+  public function editShippingMethods($type): View
+  {
+    $title = "free shipping";
 
-        return view('dashboard.settings.shipping.edit',compact('shippingMethod'));
+    if (in_array($type, ['free', 'local', 'outer'])) {
+      $shippingMethod = Setting::where('key', "{$type}_shipping_label")->first();
+      $title = "{$type} shipping";
+    } else {
+      $shippingMethod = Setting::where('key', "free_shipping_label")->first();
     }
 
-    public function updateShippingMethods(Request $request, $id)
-    {
 
-    }
+    return view('dashboard.settings.shipping.edit', compact('shippingMethod', 'title'));
+  }
+
+  public function updateShippingMethods(Request $request, $id)
+  {
+
+    return $request;
+  }
 }
