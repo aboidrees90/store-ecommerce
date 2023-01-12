@@ -1,6 +1,8 @@
 <?php
 
 
+use Mcamara\LaravelLocalization\LaravelLocalization;
+
 function getDirection($str = null)
 {
   $locale = app()->getLocale();
@@ -12,4 +14,10 @@ function getDirection($str = null)
   }
 
   //
+}
+
+
+function getCurrentLocaleCountryCode($regional = null): string
+{
+  return strtolower(explode('_', $regional)[1]);
 }

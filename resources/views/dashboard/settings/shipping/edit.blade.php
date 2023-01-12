@@ -49,23 +49,18 @@
                     <input type="hidden" name="id" value="{{ $shippingMethod->id }}">
 
                     <div class="form-body">
-
-
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                             <x-form.input name="value" label="{{ __('admin/shipping.name') }}" value="{{ $shippingMethod->value }}" />
                           </div>
                         </div>
-
-
                         <div class="col-md-6 ">
                           <div class="form-group">
                             <x-form.input name="plain_value" type="number" label="{{ __('admin/shipping.cost') }}" value="{{ $shippingMethod->plain_value }}" />
                           </div>
                         </div>
                       </div>
-
                     </div>
 
                     <div class="form-actions">

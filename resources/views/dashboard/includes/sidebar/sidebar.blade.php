@@ -48,9 +48,9 @@
         <x-menu.content>
           <x-menu.item href="#" icon="truck" title="{{ __('admin/sidebar.shipping methods') }}" data_i18n="nav.templates.vert.main">
             <x-menu.content>
-              <x-menu.item href="{{ route('shipping.method.edit', 'free') }}" title="{{ __('admin/sidebar.free shipping') }}" />
-              <x-menu.item href="{{ route('shipping.method.edit', 'local') }}" title="{{ __('admin/sidebar.local shipping') }}" />
-              <x-menu.item href="{{ route('shipping.method.edit', 'outer') }}" title="{{ __('admin/sidebar.outer shipping') }}" />
+              <x-menu.item href="{{ route('admin.shipping.method.edit', 'free') }}" title="{{ __('admin/sidebar.free shipping') }}" />
+              <x-menu.item href="{{ route('admin.shipping.method.edit', 'local') }}" title="{{ __('admin/sidebar.local shipping') }}" />
+              <x-menu.item href="{{ route('admin.shipping.method.edit', 'outer') }}" title="{{ __('admin/sidebar.outer shipping') }}" />
             </x-menu.content>
           </x-menu.item>
 
